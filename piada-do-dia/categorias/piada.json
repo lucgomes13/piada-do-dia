@@ -1,0 +1,12 @@
+{
+    "piadas": [
+      {
+        "categoria": "comedia",
+        "texto": "Por que o tomate foi passear? Para encontrar a namorada cereja."
+      },
+      {
+        "categoria": "infantil",
+        "texto": "O que o pato disse para a pata? Quack!"
+      }
+    ]
+  }
