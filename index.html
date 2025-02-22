@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piada do Dia</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #ddd;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Estilos para a seção de piadas */
+        #piada-do-dia {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        #avaliacao button {
+            margin-right: 5px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            nav li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="img/logo.png" alt="Logo Piada do Dia">
+        <h1>Piada do Dia</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Comédia</a></li>
+            <li><a href="#">Infantil</a></li>
+            <li><a href="#">Periferia</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="piada-do-dia">
+            <h2>Piada do Dia</h2>
+
+            <select id="categoria-select">
+                <option value="comedia">Comédia</option>
+                <option value="infantil">Infantil</option>
+                <option value="periferia">Periferia</option>
+            </select>
+            <button id="buscar-piada">Buscar</button>
+
+            <div id="piada">
+                </div>
+
+            <div id="avaliacao">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+            </div>
+
+            <div id="comentarios">
+                <h3>Comentários</h3>
+            </div>
+            <form id="formulario-comentario">
+                <textarea placeholder="Deixe seu comentário..."></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Piada do Dia</p>
+    </footer>
+
+    <script>
+        // Função para buscar a piada do dia
+        function buscarPiada() {
+            // Array de piadas (substitua por um arquivo JSON ou API)
+            const piadas = {
+                comedia: [
+                    "Por que o tomate foi passear? Para encontrar a namorada cereja.",
+                    "O que o advogado do tomate disse? Meu cliente é inocente, ele é um bom fruto."
+                ],
+                infantil: [
+                    "O que o pato disse para a pata? Quack!",
+                    "Qual é o bicho que vive no fogo? O vaga-lume."
+                ],
+                periferia: [
+                    "Se a vida te der limões, faça uma limonada. Se a vida te der espinhos, faça um churrasco.",
+                    "Na favela, o Wi-Fi é comunitário, a fofoca é 5G e a esperança é a última que morre."
+                ]
+            };
+
+            // Seleciona uma piada aleatória da categoria
+            const categoria = document.getElementById('categoria-select').value;
+            const piada = piadas[categoria][Math.floor(Math.random() * piadas[categoria].length)];
+            document.getElementById('piada').textContent = piada;
+        }
+
+        // Função para buscar piadas por categoria
+        function buscarPiadaPorCategoria() {
+            buscarPiada();
+        }
+
+        // Função para avaliar a piada
+        function avaliarPiada(nota) {
+            console.log('Nota: ' + nota);
+        }
+
+        // Função para enviar um comentário
+        function enviarComentario(event) {
+            event.preventDefault();
+            const comentario = document.getElementById('formulario-comentario').elements[0].value;
+            console.log('Comentário: ' + comentario);
+
+            // Exibir o comentário na lista (simulação)
+            const novoComentario = document.createElement('p');
+            novoComentario.textContent = comentario;
+            document.getElementById('comentarios').appendChild(novoComentario);
+
+            // Limpar o textarea
+            document.getElementById('formulario-comentario').elements[0].value = '';
+        }
+
+        // Eventos
+        window.onload = buscarPiada; // Busca a piada ao carregar a página
+
+        const botoesAvaliacao = document.querySelectorAll('#avaliacao button');
+        botoesAvaliacao.forEach(botao => {
+            botao.onclick = () => avaliarPiada(botao.textContent);
+        });
+
+        document.getElementById('formulario-comentario').onsubmit = enviarComentario;
+        document.getElementById('buscar-piada').onclick = buscarPiadaPorCategoria;
+    </script>
+</body>
+
+</html>
